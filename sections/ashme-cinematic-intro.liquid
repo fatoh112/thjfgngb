@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="{{ 'ashme-cinematic-intro.css' | asset_url }}">
+<section class="ashme-cinematic" data-ashme-cinematic data-cigarette-url="{{ 'ashme-cigarette.glb' | asset_url }}" data-tray-url="{{ 'ashme-tray.glb' | asset_url }}" aria-label="{{ section.settings.eyebrow | escape }}" hidden>
+  <canvas class="ashme-cinematic__canvas" data-ashme-canvas aria-hidden="true"></canvas>
+  <div class="ashme-cinematic__shade" aria-hidden="true"></div>
+  <div class="ashme-cinematic__copy" data-ashme-copy>
+    <span class="ashme-cinematic__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+    <p class="ashme-cinematic__line">{{ section.settings.supporting_text | escape }}</p>
+  </div>
+  <button class="ashme-cinematic__skip" type="button" data-ashme-skip aria-keyshortcuts="Escape">
+    {{ section.settings.skip_label | escape }}
+    <span aria-hidden="true">↗</span>
+  </button>
+  <span class="ashme-cinematic__progress" data-ashme-progress aria-hidden="true"></span>
+</section>
+<script type="module" src="{{ 'ashme-cinematic-intro.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "AshMe cinematic intro",
+  "tag": "section",
+  "class": "section-ashme-cinematic-intro",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "ASHME — A QUIETER KIND OF EVERYDAY" },
+    { "type": "text", "id": "supporting_text", "label": "Supporting text", "default": "A small moment. A better way to handle ash." },
+    { "type": "text", "id": "skip_label", "label": "Skip button", "default": "Skip intro" }
+  ],
+  "presets": [
+    { "name": "AshMe cinematic intro" }
+  ]
+}
+{% endschema %}

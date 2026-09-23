@@ -1,0 +1,22 @@
+.ashme-cinematic[hidden] { display: none; }
+.ashme-cinematic { --ashme-intro-white: #f3f2e9; position: fixed; z-index: 100; inset: 0; overflow: hidden; color: var(--ashme-intro-white); background: radial-gradient(ellipse at 50% 48%, #183331 0%, #0b1717 44%, #050a0b 100%); opacity: 1; isolation: isolate; }
+.ashme-cinematic__canvas, .ashme-cinematic__shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ashme-cinematic__canvas { display: block; }
+.ashme-cinematic__shade { pointer-events: none; background: radial-gradient(ellipse at 50% 48%, transparent 25%, rgba(2, 7, 8, .1) 64%, rgba(2, 7, 8, .75) 100%), linear-gradient(180deg, rgba(2, 8, 8, .28), transparent 35%, transparent 65%, rgba(2, 8, 8, .42)); }
+.ashme-cinematic__copy { position: absolute; z-index: 1; top: clamp(2.8rem, 7vh, 6rem); left: clamp(2.4rem, 6vw, 8.5rem); max-width: 38rem; opacity: 0; transform: translateY(1rem); }
+.ashme-cinematic__eyebrow { display: block; color: #aedbd1; font-size: 1.05rem; font-weight: 700; letter-spacing: .2em; }
+.ashme-cinematic__line { max-width: 29rem; margin: 1.2rem 0 0; color: rgba(243, 242, 233, .72); font-size: clamp(1.25rem, 1.4vw, 1.65rem); line-height: 1.55; }
+.ashme-cinematic__skip { position: absolute; z-index: 2; top: clamp(2rem, 4.4vh, 4rem); right: clamp(2rem, 4.4vw, 6rem); display: inline-flex; min-height: 4.4rem; align-items: center; gap: 1.4rem; padding: 0 1.7rem; border: 1px solid rgba(240, 246, 238, .25); border-radius: 99rem; color: var(--ashme-intro-white); background: rgba(9, 18, 17, .36); font: inherit; font-size: 1.3rem; cursor: pointer; backdrop-filter: blur(14px); transition: border-color .2s ease, background-color .2s ease; }
+.ashme-cinematic__skip:hover, .ashme-cinematic__skip:focus-visible { border-color: rgba(183, 228, 216, .8); background: rgba(36, 71, 65, .65); }
+.ashme-cinematic__skip:focus-visible { outline: 2px solid #b7e4d8; outline-offset: 3px; }
+.ashme-cinematic__skip span { color: #b7e4d8; }
+.ashme-cinematic__progress { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: linear-gradient(90deg, #9bd0c4, #d9ba86); transform: scaleX(0); transform-origin: left center; }
+@media (max-width: 749px) {
+  .ashme-cinematic__copy { top: 12vh; right: 2rem; left: 2rem; }
+  .ashme-cinematic__eyebrow { font-size: .9rem; }
+  .ashme-cinematic__line { max-width: 24rem; margin-top: .9rem; font-size: 1.2rem; }
+  .ashme-cinematic__skip { top: 2rem; right: 1.6rem; min-height: 3.8rem; padding-inline: 1.3rem; font-size: 1.15rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ashme-cinematic__skip { transition: none; }
+}
