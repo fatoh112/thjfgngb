@@ -8,13 +8,13 @@
   {%- if hero_is_sample == 'true' -%}{%- assign featured_product = nil -%}{%- assign hero_image = section.settings.image -%}{%- endif -%}
 {%- endif -%}
 
-<section class="ashme-hero" aria-labelledby="AshmeHero-{{ section.id }}">
+<section class="ashme-hero" aria-labelledby="AshmeHero-{{ section.id }}" data-ashme-hero>
   <div class="ashme-shell ashme-hero__layout">
     <div class="ashme-hero__copy">
       {%- if section.settings.eyebrow != blank -%}
         <p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
-      <h1 id="AshmeHero-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
+        <h1 id="AshmeHero-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
       {%- if section.settings.body != blank -%}
         <div class="ashme-hero__body rte">{{ section.settings.body }}</div>
       {%- endif -%}
@@ -32,26 +32,34 @@
         {%- endif -%}
       </div>
       {%- if section.settings.supporting_text != blank -%}
-        <p class="ashme-hero__supporting">{{ section.settings.supporting_text | escape }}</p>
+        <p class="ashme-hero__supporting"><span class="ashme-hero__status-dot" aria-hidden="true"></span>{{ section.settings.supporting_text | escape }}</p>
       {%- endif -%}
     </div>
-    <div class="ashme-hero__visual">
-      {%- if hero_image != blank -%}
-        {{ hero_image | image_url: width: 1600 | image_tag: class: 'ashme-hero__image', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', loading: 'eager', fetchpriority: 'high' }}
-      {%- else -%}
-        <div class="ashme-hero__wordmark" aria-label="AshMe">
-          <span class="ashme-hero__wordmark-name">AshMe</span>
-          <span class="ashme-hero__wordmark-caption">A WATER-ACTIVATED<br>DISPOSABLE ASHTRAY</span>
-        </div>
-      {%- endif -%}
+    <div class="ashme-hero__visual" data-ashme-tilt>
+      <div class="ashme-hero__light" aria-hidden="true"></div>
+      <div class="ashme-hero__orbit ashme-hero__orbit--outer" aria-hidden="true"></div>
+      <div class="ashme-hero__orbit ashme-hero__orbit--inner" aria-hidden="true"></div>
+      <div class="ashme-hero__stage" data-ashme-tilt-layer>
+        {%- if hero_image != blank -%}
+          {{ hero_image | image_url: width: 1600 | image_tag: class: 'ashme-hero__image', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', loading: 'eager', fetchpriority: 'high' }}
+        {%- else -%}
+          <div class="ashme-hero__wordmark" aria-label="AshMe">
+            <span class="ashme-hero__wordmark-name">AshMe</span>
+            <span class="ashme-hero__wordmark-caption">WATER-ACTIVATED<br>DISPOSABLE ASHTRAY</span>
+          </div>
+        {%- endif -%}
+      </div>
       {%- if featured_product != blank -%}
         <a class="ashme-hero__product-note" href="{{ featured_product.url }}">
-          <span>{{ featured_product.title | escape }}</span>
-          <span>{{ featured_product.price | money }}</span>
+          <span class="ashme-hero__note-mark" aria-hidden="true">A</span>
+          <span class="ashme-hero__note-copy"><span class="ashme-hero__note-label">THE ASHME ESSENTIAL</span><span>{{ featured_product.title | escape }}</span></span>
+          <span class="ashme-hero__note-price">{{ featured_product.price | money }}<span aria-hidden="true">↗</span></span>
         </a>
       {%- endif -%}
+      <span class="ashme-hero__side-note" aria-hidden="true">DESIGNED TO DISAPPEAR INTO YOUR ROUTINE</span>
     </div>
   </div>
+  <span class="ashme-hero__index" aria-hidden="true">01 <i></i> 03</span>
 </section>
 
 {% schema %}

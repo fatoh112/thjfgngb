@@ -1,22 +1,52 @@
+{%- assign story_product = section.settings.product -%}
+{%- if story_product == blank -%}
+  {%- assign story_product = all_products['ashme-water-activated-ashtray-disposable-gel-ashtray'] -%}
+{%- endif -%}
+<script src="{{ 'ashme-story.js' | asset_url }}" defer="defer"></script>
 <section id="ashme-how-it-works" class="ashme-section ashme-how" aria-labelledby="AshmeHow-{{ section.id }}">
   <div class="ashme-shell">
-    <div class="ashme-section__intro">
-      {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-      <h2 id="AshmeHow-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
-      {%- if section.settings.body != blank -%}<div class="ashme-section__body rte">{{ section.settings.body }}</div>{%- endif -%}
+    <div class="ashme-process__heading">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="AshmeHow-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      </div>
+      {%- if section.settings.note != blank -%}<p class="ashme-process__note">{{ section.settings.note | escape }}</p>{%- endif -%}
     </div>
-    <ol class="ashme-steps">
-      {%- for block in section.blocks -%}
-        <li class="ashme-step" {{ block.shopify_attributes }}>
-          <span class="ashme-step__number">{{ forloop.index | prepend: '0' }}</span>
+    <ashme-story class="ashme-process" data-ashme-story>
+      <div class="ashme-process__stage" aria-hidden="true">
+        <div class="ashme-process__stage-light"></div>
+        <div class="ashme-process__stage-orbit"></div>
+        {%- if story_product.featured_image != blank -%}
+          {{ story_product.featured_image | image_url: width: 1100 | image_tag: class: 'ashme-process__image', widths: '360, 540, 720, 900, 1100', sizes: '(min-width: 990px) 52vw, 100vw', loading: 'lazy' }}
+        {%- else -%}
+          <span class="ashme-process__wordmark">AshMe</span>
+        {%- endif -%}
+        <span class="ashme-process__stage-count"><span data-ashme-current-number>01</span><i></i>{{ section.blocks.size | prepend: '0' }}</span>
+      </div>
+      <div class="ashme-process__steps">
+        <p class="ashme-process__kicker">{{ section.settings.body | strip_html | escape }}</p>
+        <div class="ashme-process__tabs" role="tablist" aria-label="AshMe preparation steps" style="--ashme-step-count: {{ section.blocks.size }}">
+          {%- for block in section.blocks -%}
+            <button class="ashme-process__tab{% if forloop.first %} is-active{% endif %}" type="button" role="tab" id="AshmeStepTab-{{ section.id }}-{{ forloop.index }}" aria-controls="AshmeStepPanel-{{ section.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}" data-ashme-step-title="{{ block.settings.heading | escape }}" data-ashme-step-copy="{{ block.settings.body | escape }}" {{ block.shopify_attributes }}>
+              <span>{{ forloop.index | prepend: '0' }}</span><i aria-hidden="true"></i>
+            </button>
+          {%- endfor -%}
+        </div>
+        {%- assign first_step = section.blocks.first -%}
+        <div class="ashme-process__panel" id="AshmeStepPanel-{{ section.id }}" role="tabpanel" aria-labelledby="AshmeStepTab-{{ section.id }}-1" aria-live="polite" tabindex="0">
+          <span class="ashme-process__panel-number" data-ashme-panel-number>01 / {{ section.blocks.size | prepend: '0' }}</span>
+          <h3 data-ashme-panel-title>{{ first_step.settings.heading | escape }}</h3>
+          <p data-ashme-panel-copy>{{ first_step.settings.body | escape }}</p>
+        </div>
+        <div class="ashme-process__controls">
+          <span class="ashme-process__step-label">A SIMPLE {{ section.blocks.size | prepend: '0' }}-STEP ROUTINE</span>
           <div>
-            <h3>{{ block.settings.heading | escape }}</h3>
-            {%- if block.settings.body != blank -%}<p>{{ block.settings.body | escape }}</p>{%- endif -%}
+            <button type="button" data-ashme-previous aria-label="Previous preparation step" disabled>←</button>
+            <button type="button" data-ashme-next aria-label="Next preparation step">→</button>
           </div>
-        </li>
-      {%- endfor -%}
-    </ol>
-    {%- if section.settings.note != blank -%}<p class="ashme-how__note">{{ section.settings.note | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    </ashme-story>
   </div>
 </section>
 
@@ -24,24 +54,24 @@
 {
   "name": "How AshMe works",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Straightforward by design" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready in a few simple steps." },
-    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>Use the instructions supplied with your AshMe product for preparation and disposal.</p>" },
-    { "type": "text", "id": "note", "label": "Instruction note", "default": "Always follow the fill line and disposal guidance printed on your product." }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A little water. A simple routine." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Four steps. Ready when you are." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>Follow the guidance supplied with your product.</p>" },
+    { "type": "text", "id": "note", "label": "Instruction note", "default": "Use the fill line and disposal guidance printed on your product." },
+    { "type": "product", "id": "product", "label": "Product shown in process stage" }
   ],
   "blocks": [
     { "type": "step", "name": "Step", "settings": [
-      { "type": "text", "id": "heading", "label": "Heading", "default": "Prepare AshMe" },
-      { "type": "textarea", "id": "body", "label": "Description", "default": "Open the product and follow its preparation instructions." }
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Open and prepare" },
+      { "type": "textarea", "id": "body", "label": "Description", "default": "Open AshMe and follow the preparation guidance supplied with the product." }
     ] }
   ],
   "max_blocks": 5,
   "presets": [{ "name": "How AshMe works", "blocks": [
-    { "type": "step", "settings": { "heading": "Open and prepare", "body": "Open AshMe and get it ready according to the product instructions." } },
     { "type": "step", "settings": { "heading": "Add water to the fill line", "body": "Use the water level indicated on the product." } },
-    { "type": "step", "settings": { "heading": "Allow it to activate", "body": "Give the material time to activate as directed." } },
-    { "type": "step", "settings": { "heading": "Use for ash disposal", "body": "Use AshMe as described in the supplied instructions." } },
-    { "type": "step", "settings": { "heading": "Dispose as instructed", "body": "Follow the product’s disposal guidance and local requirements." } }
+    { "type": "step", "settings": { "heading": "Wait for it to activate", "body": "Give the blue insert a few moments to expand into gel, as shown in the product instructions." } },
+    { "type": "step", "settings": { "heading": "Use when ready", "body": "Once activated, use AshMe as shown in the instructions supplied with the product." } },
+    { "type": "step", "settings": { "heading": "Dispose when full", "body": "When full, follow the disposal guidance supplied with the product." } }
   ] }]
 }
 {% endschema %}

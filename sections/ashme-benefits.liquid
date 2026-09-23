@@ -1,10 +1,6 @@
 <section class="ashme-section ashme-benefits" aria-labelledby="AshmeBenefits-{{ section.id }}">
   <div class="ashme-shell">
-    <div class="ashme-section__intro ashme-section__intro--compact">
-      {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-      <h2 id="AshmeBenefits-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
-      {%- if section.settings.body != blank -%}<div class="ashme-section__body rte">{{ section.settings.body }}</div>{%- endif -%}
-    </div>
+    <h2 class="visually-hidden" id="AshmeBenefits-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
     <div class="ashme-benefits__grid">
       {%- for block in section.blocks -%}
         <article class="ashme-benefit" {{ block.shopify_attributes }}>
