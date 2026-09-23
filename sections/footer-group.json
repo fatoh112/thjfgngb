@@ -13,10 +13,27 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "ashme_description": {
+          "type": "text",
+          "settings": {
+            "heading": "AshMe",
+            "subtext": "<p>A water-activated disposable ashtray for everyday ash disposal.</p>"
+          }
+        },
+        "ashme_links": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Explore AshMe",
+            "menu": "main-menu"
+          }
+        }
+      },
+      "block_order": ["ashme_description", "ashme_links"],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "Notes from AshMe",
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": true,

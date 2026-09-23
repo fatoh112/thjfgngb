@@ -1,0 +1,45 @@
+<section class="ashme-section ashme-use-cases" aria-labelledby="AshmeUseCases-{{ section.id }}">
+  <div class="ashme-shell">
+    <div class="ashme-section__intro ashme-section__intro--row">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="AshmeUseCases-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      </div>
+      {%- if section.settings.body != blank -%}<div class="ashme-section__body rte">{{ section.settings.body }}</div>{%- endif -%}
+    </div>
+    <div class="ashme-use-cases__grid">
+      {%- for block in section.blocks -%}
+        <article class="ashme-use-case{% if block.settings.image == blank %} ashme-use-case--text-only{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: class: 'ashme-use-case__image', widths: '360, 540, 720, 900', sizes: '(min-width: 750px) 33vw, 100vw', loading: 'lazy' }}
+          {%- endif -%}
+          <div class="ashme-use-case__copy"><h3>{{ block.settings.heading | escape }}</h3>{%- if block.settings.body != blank -%}<p>{{ block.settings.body | escape }}</p>{%- endif -%}</div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AshMe moments",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Made for the everyday" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "At home, or out in the fresh air." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>Keep AshMe close for the places you already spend time.</p>" }
+  ],
+  "blocks": [
+    { "type": "moment", "name": "Moment", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "At home" },
+      { "type": "textarea", "id": "body", "label": "Description", "default": "A practical place for ash on the patio or balcony." },
+      { "type": "image_picker", "id": "image", "label": "Image" }
+    ] }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "AshMe moments", "blocks": [
+    { "type": "moment", "settings": { "heading": "At home", "body": "For the balcony, patio, or garden." } },
+    { "type": "moment", "settings": { "heading": "Around the table", "body": "A considered option for cafés and outdoor seating." } },
+    { "type": "moment", "settings": { "heading": "On the go", "body": "A compact format for everyday outings." } }
+  ] }]
+}
+{% endschema %}

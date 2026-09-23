@@ -9,76 +9,132 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+    "ashme_hero": {
+      "type": "ashme-hero",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "eyebrow": "A considered everyday essential",
+        "heading": "Ash, handled with more care.",
+        "body": "<p>Meet AshMe: the water-activated disposable ashtray designed for simple, everyday use.</p>",
+        "product": "ashme-disposable-ashtray",
+        "primary_label": "Shop AshMe",
+        "primary_link": "shopify://collections/all",
+        "secondary_label": "See how it works",
+        "secondary_link": "/#ashme-how-it-works",
+        "supporting_text": "Thoughtfully simple. Ready when you are."
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "ashme_benefits": {
+      "type": "ashme-benefits",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "eyebrow": "The essentials",
+        "heading": "A small change to your routine.",
+        "body": "<p>Simple details that make ash disposal easier to manage.</p>"
+      },
+      "blocks": {
+        "water_activated": { "type": "benefit", "settings": { "heading": "Water-activated", "body": "Add water as directed to prepare AshMe for use." } },
+        "simple_to_prepare": { "type": "benefit", "settings": { "heading": "Simple to prepare", "body": "Follow the fill level and preparation instructions on the product." } },
+        "disposable_format": { "type": "benefit", "settings": { "heading": "Disposable format", "body": "A practical option for everyday ash disposal." } }
+      },
+      "block_order": ["water_activated", "simple_to_prepare", "disposable_format"]
+    },
+    "ashme_how": {
+      "type": "ashme-how-it-works",
+      "settings": {
+        "eyebrow": "Straightforward by design",
+        "heading": "Ready in a few simple steps.",
+        "body": "<p>Use the instructions supplied with your AshMe product for preparation and disposal.</p>",
+        "note": "Always follow the fill line and disposal guidance printed on your product."
+      },
+      "blocks": {
+        "open_prepare": { "type": "step", "settings": { "heading": "Open and prepare", "body": "Open AshMe and get it ready according to the product instructions." } },
+        "add_water": { "type": "step", "settings": { "heading": "Add water to the fill line", "body": "Use the water level indicated on the product." } },
+        "activate": { "type": "step", "settings": { "heading": "Allow it to activate", "body": "Give the material time to activate as directed." } },
+        "use": { "type": "step", "settings": { "heading": "Use for ash disposal", "body": "Use AshMe as described in the supplied instructions." } },
+        "dispose": { "type": "step", "settings": { "heading": "Dispose as instructed", "body": "Follow the product’s disposal guidance and local requirements." } }
+      },
+      "block_order": ["open_prepare", "add_water", "activate", "use", "dispose"]
+    },
+    "ashme_spotlight": {
+      "type": "ashme-product-spotlight",
+      "settings": {
+        "product": "ashme-disposable-ashtray",
+        "eyebrow": "The AshMe essential",
+        "heading": "A simpler way to handle ash.",
+        "body": "<p>Water-activated and disposable. Follow the instructions provided with your product.</p>",
+        "button_label": "Add to cart",
+        "details_label": "View product details"
+      }
+    },
+    "ashme_product_details": {
+      "type": "ashme-product-details",
+      "settings": {
+        "eyebrow": "A closer look",
+        "heading": "Made to fit into the everyday.",
+        "body": "<p>See the product format and preparation details in closer view.</p>"
+      },
+      "blocks": {
+        "water_activation": { "type": "detail", "settings": { "eyebrow": "Water activation", "heading": "A simple preparation step.", "body": "<p>Add water to the marked level and follow the instructions supplied with the product.</p>" } },
+        "everyday_format": { "type": "detail", "settings": { "eyebrow": "Everyday format", "heading": "A dedicated place for ash.", "body": "<p>Use AshMe as described in the product instructions and follow its disposal guidance.</p>" } }
+      },
+      "block_order": ["water_activation", "everyday_format"]
+    },
+    "ashme_contrast": {
+      "type": "ashme-contrast",
+      "settings": {
+        "eyebrow": "A more considered routine",
+        "heading": "Less loose ash. More considered disposal.",
+        "body": "<p>AshMe gives ash a dedicated place, ready when you need it.</p>",
+        "left_label": "Loose ash",
+        "right_label": "With AshMe"
+      },
+      "blocks": {
+        "scatter": { "type": "before", "settings": { "text": "Loose ash can scatter during clean-up." } },
+        "extra_steps": { "type": "before", "settings": { "text": "Finding a suitable place to collect it takes extra steps." } },
+        "dedicated": { "type": "after", "settings": { "text": "AshMe keeps disposal in one dedicated place." } },
+        "instructions": { "type": "after", "settings": { "text": "Add water as directed, then follow the product instructions." } }
+      },
+      "block_order": ["scatter", "extra_steps", "dedicated", "instructions"]
+    },
+    "ashme_moments": {
+      "type": "ashme-use-cases",
+      "settings": {
+        "eyebrow": "Made for the everyday",
+        "heading": "At home, or out in the fresh air.",
+        "body": "<p>Keep AshMe close for the places you already spend time.</p>"
+      },
+      "blocks": {
+        "at_home": { "type": "moment", "settings": { "heading": "At home", "body": "For the balcony, patio, or garden." } },
+        "around_table": { "type": "moment", "settings": { "heading": "Around the table", "body": "A considered option for cafés and outdoor seating." } },
+        "on_go": { "type": "moment", "settings": { "heading": "On the go", "body": "A compact format for everyday outings." } }
+      },
+      "block_order": ["at_home", "around_table", "on_go"]
+    },
+    "ashme_faq": {
+      "type": "ashme-faq",
+      "settings": {
+        "eyebrow": "Good to know",
+        "heading": "A few useful answers.",
+        "body": "<p>Still have a question? Get in touch and we’ll point you in the right direction.</p>",
+        "contact_label": "Contact AshMe"
+      },
+      "blocks": {
+        "prepare": { "type": "question", "settings": { "question": "How do I prepare AshMe?", "answer": "<p>Add water to the indicated level and follow the preparation instructions supplied with your product.</p>" } },
+        "activate": { "type": "question", "settings": { "question": "How long should I let it activate?", "answer": "<p>Follow the activation time stated in the instructions supplied with your product.</p>" } },
+        "disposable": { "type": "question", "settings": { "question": "Is AshMe disposable?", "answer": "<p>Yes. AshMe is a disposable ashtray. Follow the product’s disposal guidance and local requirements.</p>" } },
+        "delivery": { "type": "question", "settings": { "question": "Where can I find delivery and returns information?", "answer": "<p>See the delivery and returns information linked in the footer, or contact us if you need help.</p>" } }
+      },
+      "block_order": ["prepare", "activate", "disposable", "delivery"]
+    },
+    "ashme_cta": {
+      "type": "ashme-final-cta",
+      "settings": {
+        "eyebrow": "Make room for a better routine",
+        "heading": "A better place for ash starts here.",
+        "body": "<p>Discover AshMe and find the product details that fit your needs.</p>",
+        "button_label": "Explore AshMe",
+        "button_link": "shopify://collections/all"
       }
     }
   },
-  "order": [
-    "image_banner",
-    "featured_collection"
-  ]
+  "order": ["ashme_hero", "ashme_benefits", "ashme_how", "ashme_spotlight", "ashme_contrast", "ashme_product_details", "ashme_moments", "ashme_faq", "ashme_cta"]
 }

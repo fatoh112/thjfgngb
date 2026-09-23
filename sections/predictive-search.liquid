@@ -130,6 +130,12 @@
               aria-labelledby="predictive-search-products"
             >
               {%- for product in predictive_search.resources.products -%}
+                {%- assign ashme_sample_handle = product.handle | downcase -%}
+                {%- if ashme_sample_handle contains 'other-example-product-' or product.tags contains 'Sample Product' -%}
+                  {%- continue -%}
+                {%- endif -%}
+                {%- capture ashme_predictive_product_is_sample -%}{%- render 'ashme-sample-product', product: product -%}{%- endcapture -%}
+                {%- unless ashme_predictive_product_is_sample == 'true' -%}
                 <li
                   id="predictive-search-option-product-{{ forloop.index }}"
                   class="predictive-search__list-item"
@@ -164,6 +170,7 @@
                     </div>
                   </a>
                 </li>
+                {%- endunless -%}
               {%- endfor -%}
             </ul>
           </div>

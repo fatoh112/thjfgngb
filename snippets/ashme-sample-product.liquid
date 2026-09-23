@@ -1,0 +1,18 @@
+{% doc %}
+  Identifies obvious theme demonstration products so they aren't surfaced in customer-facing product grids.
+  @param {product} product - Product to inspect
+  @example
+  {% render 'ashme-sample-product', product: product %}
+{% enddoc %}
+{%- assign sample_handle = product.handle | downcase -%}
+{%- assign is_sample_product = false -%}
+{%- if sample_handle == 'other-example-product-1' or sample_handle == 'other-example-product-2' or sample_handle == 'other-example-product-3' or sample_handle == 'other-example-product-4' -%}
+  {%- assign is_sample_product = true -%}
+{%- endif -%}
+{%- for product_tag in product.tags -%}
+  {%- assign normalized_tag = product_tag | downcase -%}
+  {%- if normalized_tag == 'sample product' or normalized_tag == 'sample-product' or normalized_tag == 'theme-demo' or normalized_tag == 'example product' -%}
+    {%- assign is_sample_product = true -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if is_sample_product -%}true{%- endif -%}

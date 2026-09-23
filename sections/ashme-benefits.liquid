@@ -1,0 +1,37 @@
+<section class="ashme-section ashme-benefits" aria-labelledby="AshmeBenefits-{{ section.id }}">
+  <div class="ashme-shell">
+    <div class="ashme-section__intro ashme-section__intro--compact">
+      {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AshmeBenefits-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.body != blank -%}<div class="ashme-section__body rte">{{ section.settings.body }}</div>{%- endif -%}
+    </div>
+    <div class="ashme-benefits__grid">
+      {%- for block in section.blocks -%}
+        <article class="ashme-benefit" {{ block.shopify_attributes }}>
+          <span class="ashme-benefit__index" aria-hidden="true">0{{ forloop.index }}</span>
+          <h3>{{ block.settings.heading | escape }}</h3>
+          {%- if block.settings.body != blank -%}<p>{{ block.settings.body | escape }}</p>{%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AshMe benefits",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The essentials" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A small change to your routine." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>Simple details that make ash disposal easier to manage.</p>" }
+  ],
+  "blocks": [
+    { "type": "benefit", "name": "Benefit", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Water-activated" },
+      { "type": "textarea", "id": "body", "label": "Description", "default": "Add water as directed to prepare AshMe for use." }
+    ] }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "AshMe benefits", "blocks": [{ "type": "benefit" }, { "type": "benefit", "settings": { "heading": "Simple to prepare", "body": "Follow the fill level and preparation instructions on the product." } }, { "type": "benefit", "settings": { "heading": "Disposable format", "body": "A practical option for everyday ash disposal." } }] }]
+}
+{% endschema %}

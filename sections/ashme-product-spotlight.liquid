@@ -1,0 +1,76 @@
+{%- assign featured_product = section.settings.product -%}
+{%- if featured_product == blank -%}
+  {%- assign featured_product = all_products['ashme-water-activated-ashtray-disposable-gel-ashtray'] -%}
+{%- endif -%}
+{%- assign spotlight_form_id = 'AshmeSpotlightForm-' | append: section.id -%}
+{%- assign spotlight_variant = featured_product.selected_or_first_available_variant -%}
+{%- if featured_product != blank -%}
+  {%- capture spotlight_is_sample -%}{%- render 'ashme-sample-product', product: featured_product -%}{%- endcapture -%}
+  {%- if spotlight_is_sample == 'true' -%}{%- assign featured_product = nil -%}{%- endif -%}
+{%- endif -%}
+
+{%- if featured_product != blank -%}
+  <section id="ashme-product" class="ashme-section ashme-spotlight" aria-labelledby="AshmeSpotlight-{{ section.id }}">
+    <div class="ashme-shell ashme-spotlight__layout">
+      <div class="ashme-spotlight__media{% if featured_product.featured_image == blank %} ashme-spotlight__media--wordmark{% endif %}">
+        {%- if featured_product.featured_image != blank -%}
+          {{ featured_product.featured_image | image_url: width: 1200 | image_tag: class: 'ashme-spotlight__image', widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 990px) 50vw, 100vw', loading: 'lazy' }}
+        {%- else -%}
+          <span aria-hidden="true">AshMe</span>
+        {%- endif -%}
+      </div>
+      <div class="ashme-spotlight__content">
+        {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="AshmeSpotlight-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+        <p class="ashme-spotlight__name">{{ featured_product.title | escape }}</p>
+        {% render 'price', product: featured_product, use_variant: true, show_badges: true, price_class: 'ashme-spotlight__price' %}
+        {%- if section.settings.body != blank -%}<div class="ashme-section__body rte">{{ section.settings.body }}</div>{%- endif -%}
+        {%- if featured_product.variants.size == 1 -%}
+          <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+          <product-form class="ashme-spotlight__product-form" data-section-id="{{ section.id }}">
+            <div class="product-form__error-message-wrapper" role="alert" hidden>
+              <span class="product-form__error-message"></span>
+            </div>
+            {%- form 'product', featured_product, id: spotlight_form_id, class: 'ashme-spotlight__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ spotlight_variant.id }}"{% unless spotlight_variant.available %} disabled{% endunless %}>
+              <label class="ashme-quantity-label" for="AshmeQuantity-{{ section.id }}">{{ 'products.product.quantity.label' | t }}</label>
+              <input id="AshmeQuantity-{{ section.id }}" class="ashme-quantity" type="number" name="quantity" value="{{ spotlight_variant.quantity_rule.min }}" min="{{ spotlight_variant.quantity_rule.min }}" step="{{ spotlight_variant.quantity_rule.increment }}"{% if spotlight_variant.quantity_rule.max != blank %} max="{{ spotlight_variant.quantity_rule.max }}"{% endif %} inputmode="numeric">
+              <button class="ashme-button ashme-button--primary ashme-spotlight__submit" type="submit" name="add" {% unless spotlight_variant.available %}disabled{% endunless %}>
+                <span>{%- if spotlight_variant.available -%}{{ section.settings.button_label | escape }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}</span>
+                {%- render 'loading-spinner' -%}
+              </button>
+            {%- endform -%}
+          </product-form>
+        {%- else -%}
+          <a class="ashme-button ashme-button--primary ashme-spotlight__submit" href="{{ featured_product.url }}">{{ section.settings.options_button_label | escape }}</a>
+        {%- endif -%}
+        <a class="ashme-spotlight__details" href="{{ featured_product.url }}">{{ section.settings.details_label | escape }} <span aria-hidden="true">&rarr;</span></a>
+        {%- if shop.shipping_policy.body != blank -%}<p class="ashme-spotlight__shipping">{{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}</p>{%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- else -%}
+  <section id="ashme-product" class="ashme-section ashme-spotlight" aria-labelledby="AshmeSpotlight-{{ section.id }}">
+    <div class="ashme-shell ashme-spotlight__configuration">
+      {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AshmeSpotlight-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      <p>Choose an AshMe product in this section’s theme editor settings to show its live price and product details.</p>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "AshMe product feature",
+  "settings": [
+    { "type": "product", "id": "product", "label": "AshMe product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The AshMe essential" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A simpler way to handle ash." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>Water-activated and disposable. Follow the instructions provided with your product.</p>" },
+    { "type": "text", "id": "button_label", "label": "Add button", "default": "Add to cart" },
+    { "type": "text", "id": "options_button_label", "label": "Button for products with options", "default": "Choose options" },
+    { "type": "text", "id": "details_label", "label": "Product details link", "default": "View product details" }
+  ],
+  "presets": [{ "name": "AshMe product feature" }]
+}
+{% endschema %}

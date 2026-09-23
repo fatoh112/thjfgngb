@@ -1,0 +1,43 @@
+<section class="ashme-section ashme-contrast" aria-labelledby="AshmeContrast-{{ section.id }}">
+  <div class="ashme-shell ashme-contrast__layout">
+    <div class="ashme-contrast__intro">
+      {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AshmeContrast-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.body != blank -%}<div class="rte">{{ section.settings.body }}</div>{%- endif -%}
+    </div>
+    <div class="ashme-contrast__columns">
+      <div class="ashme-contrast__column">
+        <p class="ashme-contrast__label">{{ section.settings.left_label | escape }}</p>
+        <ul>{%- for block in section.blocks -%}{%- if block.type == 'before' -%}<li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>{%- endif -%}{%- endfor -%}</ul>
+      </div>
+      <div class="ashme-contrast__column ashme-contrast__column--solution">
+        <p class="ashme-contrast__label">{{ section.settings.right_label | escape }}</p>
+        <ul>{%- for block in section.blocks -%}{%- if block.type == 'after' -%}<li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>{%- endif -%}{%- endfor -%}</ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AshMe comparison",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A more considered routine" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Less loose ash. More considered disposal." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>AshMe gives ash a dedicated place, ready when you need it.</p>" },
+    { "type": "text", "id": "left_label", "label": "First column heading", "default": "Loose ash" },
+    { "type": "text", "id": "right_label", "label": "Second column heading", "default": "With AshMe" }
+  ],
+  "blocks": [
+    { "type": "before", "name": "Loose ash point", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Ash can be awkward to manage." }] },
+    { "type": "after", "name": "AshMe point", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "A dedicated disposable ashtray." }] }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "AshMe comparison", "blocks": [
+    { "type": "before", "settings": { "text": "Loose ash can scatter during clean-up." } },
+    { "type": "before", "settings": { "text": "Finding a suitable place to collect it takes extra steps." } },
+    { "type": "after", "settings": { "text": "AshMe keeps disposal in one dedicated place." } },
+    { "type": "after", "settings": { "text": "Add water as directed, then follow the product instructions." } }
+  ] }]
+}
+{% endschema %}

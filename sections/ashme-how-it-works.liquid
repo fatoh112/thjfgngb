@@ -1,0 +1,47 @@
+<section id="ashme-how-it-works" class="ashme-section ashme-how" aria-labelledby="AshmeHow-{{ section.id }}">
+  <div class="ashme-shell">
+    <div class="ashme-section__intro">
+      {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AshmeHow-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.body != blank -%}<div class="ashme-section__body rte">{{ section.settings.body }}</div>{%- endif -%}
+    </div>
+    <ol class="ashme-steps">
+      {%- for block in section.blocks -%}
+        <li class="ashme-step" {{ block.shopify_attributes }}>
+          <span class="ashme-step__number">{{ forloop.index | prepend: '0' }}</span>
+          <div>
+            <h3>{{ block.settings.heading | escape }}</h3>
+            {%- if block.settings.body != blank -%}<p>{{ block.settings.body | escape }}</p>{%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if section.settings.note != blank -%}<p class="ashme-how__note">{{ section.settings.note | escape }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How AshMe works",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Straightforward by design" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready in a few simple steps." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>Use the instructions supplied with your AshMe product for preparation and disposal.</p>" },
+    { "type": "text", "id": "note", "label": "Instruction note", "default": "Always follow the fill line and disposal guidance printed on your product." }
+  ],
+  "blocks": [
+    { "type": "step", "name": "Step", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Prepare AshMe" },
+      { "type": "textarea", "id": "body", "label": "Description", "default": "Open the product and follow its preparation instructions." }
+    ] }
+  ],
+  "max_blocks": 5,
+  "presets": [{ "name": "How AshMe works", "blocks": [
+    { "type": "step", "settings": { "heading": "Open and prepare", "body": "Open AshMe and get it ready according to the product instructions." } },
+    { "type": "step", "settings": { "heading": "Add water to the fill line", "body": "Use the water level indicated on the product." } },
+    { "type": "step", "settings": { "heading": "Allow it to activate", "body": "Give the material time to activate as directed." } },
+    { "type": "step", "settings": { "heading": "Use for ash disposal", "body": "Use AshMe as described in the supplied instructions." } },
+    { "type": "step", "settings": { "heading": "Dispose as instructed", "body": "Follow the product’s disposal guidance and local requirements." } }
+  ] }]
+}
+{% endschema %}

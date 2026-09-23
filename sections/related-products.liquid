@@ -28,6 +28,12 @@
     data-product-id="{{ product.id }}"
   >
     {% if recommendations.performed and recommendations.products_count > 0 %}
+      {% assign ashme_recommendation_count = 0 %}
+      {% for recommendation in recommendations.products %}
+        {%- capture sample_product -%}{%- render 'ashme-sample-product', product: recommendation -%}{%- endcapture -%}
+        {%- unless sample_product == 'true' -%}{%- assign ashme_recommendation_count = ashme_recommendation_count | plus: 1 -%}{%- endunless -%}
+      {% endfor %}
+      {% if ashme_recommendation_count > 0 %}
       <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
         {{ section.settings.heading }}
       </h2>
@@ -37,6 +43,12 @@
       >
         {% assign skip_card_product_styles = false %}
         {% for recommendation in recommendations.products %}
+          {%- assign ashme_sample_handle = recommendation.handle | downcase -%}
+          {%- if ashme_sample_handle contains 'other-example-product-' or recommendation.tags contains 'Sample Product' -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- capture sample_product -%}{%- render 'ashme-sample-product', product: recommendation -%}{%- endcapture -%}
+          {%- if sample_product != 'true' -%}
           <li class="grid__item">
             {% render 'card-product',
               card_product: recommendation,
@@ -49,8 +61,10 @@
             %}
           </li>
           {%- assign skip_card_product_styles = true -%}
+          {%- endif -%}
         {% endfor %}
       </ul>
+      {% endif %}
     {% endif %}
   </product-recommendations>
   {% if section.settings.image_shape == 'arch' %}

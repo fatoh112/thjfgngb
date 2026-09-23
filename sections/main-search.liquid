@@ -258,6 +258,17 @@
               >
                 {%- assign skip_card_product_styles = false -%}
                 {%- for item in search.results -%}
+                  {%- if item.object_type == 'product' -%}
+                    {%- assign ashme_sample_handle = item.handle | downcase -%}
+                    {%- if ashme_sample_handle contains 'other-example-product-' or item.tags contains 'Sample Product' -%}
+                      {%- continue -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                  {%- assign ashme_search_item_is_sample = false -%}
+                  {%- if item.object_type == 'product' -%}
+                    {%- capture ashme_search_item_is_sample -%}{%- render 'ashme-sample-product', product: item -%}{%- endcapture -%}
+                  {%- endif -%}
+                  {%- unless ashme_search_item_is_sample == 'true' -%}
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
@@ -317,6 +328,7 @@
                         </div>
                     {%- endcase -%}
                   </li>
+                  {%- endunless -%}
                 {%- endfor -%}
               </ul>
               {%- if paginate.pages > 1 -%}

@@ -12,13 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
@@ -57,7 +50,6 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "price",
         "variant_picker",
@@ -82,6 +74,66 @@
         "padding_bottom": 12
       }
     },
+    "ashme_benefits": {
+      "type": "ashme-benefits",
+      "settings": {
+        "eyebrow": "The essentials",
+        "heading": "Designed for everyday use.",
+        "body": "<p>Simple details that make ash disposal easier to manage.</p>"
+      },
+      "blocks": {
+        "water": { "type": "benefit", "settings": { "heading": "Water-activated", "body": "Add water as directed to prepare AshMe for use." } },
+        "prepare": { "type": "benefit", "settings": { "heading": "Simple to prepare", "body": "Follow the fill level and preparation instructions on the product." } },
+        "disposable": { "type": "benefit", "settings": { "heading": "Disposable format", "body": "A practical option for everyday ash disposal." } }
+      },
+      "block_order": ["water", "prepare", "disposable"]
+    },
+    "ashme_how": {
+      "type": "ashme-how-it-works",
+      "settings": {
+        "eyebrow": "Straightforward by design",
+        "heading": "Ready in a few simple steps.",
+        "body": "<p>Use the instructions supplied with your AshMe product for preparation and disposal.</p>",
+        "note": "Always follow the fill line and disposal guidance printed on your product."
+      },
+      "blocks": {
+        "open_prepare": { "type": "step", "settings": { "heading": "Open and prepare", "body": "Open AshMe and get it ready according to the product instructions." } },
+        "add_water": { "type": "step", "settings": { "heading": "Add water to the fill line", "body": "Use the water level indicated on the product." } },
+        "activate": { "type": "step", "settings": { "heading": "Allow it to activate", "body": "Give the material time to activate as directed." } },
+        "use": { "type": "step", "settings": { "heading": "Use for ash disposal", "body": "Use AshMe as described in the supplied instructions." } },
+        "dispose": { "type": "step", "settings": { "heading": "Dispose as instructed", "body": "Follow the product’s disposal guidance and local requirements." } }
+      },
+      "block_order": ["open_prepare", "add_water", "activate", "use", "dispose"]
+    },
+    "ashme_product_details": {
+      "type": "ashme-product-details",
+      "settings": {
+        "eyebrow": "A closer look",
+        "heading": "Made to fit into the everyday.",
+        "body": "<p>See the product format and preparation details in closer view.</p>"
+      },
+      "blocks": {
+        "water_activation": { "type": "detail", "settings": { "eyebrow": "Water activation", "heading": "A simple preparation step.", "body": "<p>Add water to the marked level and follow the instructions supplied with the product.</p>" } },
+        "everyday_format": { "type": "detail", "settings": { "eyebrow": "Everyday format", "heading": "A dedicated place for ash.", "body": "<p>Use AshMe as described in the product instructions and follow its disposal guidance.</p>" } }
+      },
+      "block_order": ["water_activation", "everyday_format"]
+    },
+    "ashme_faq": {
+      "type": "ashme-faq",
+      "settings": {
+        "eyebrow": "Good to know",
+        "heading": "A few useful answers.",
+        "body": "<p>Still have a question? Get in touch and we’ll point you in the right direction.</p>",
+        "contact_label": "Contact AshMe",
+        "contact_link": "shopify://pages/contact"
+      },
+      "blocks": {
+        "prepare": { "type": "question", "settings": { "question": "How do I prepare AshMe?", "answer": "<p>Add water to the indicated level and follow the preparation instructions supplied with your product.</p>" } },
+        "activation": { "type": "question", "settings": { "question": "How long should I let it activate?", "answer": "<p>Follow the activation time stated in the instructions supplied with your product.</p>" } },
+        "disposal": { "type": "question", "settings": { "question": "How should I dispose of it?", "answer": "<p>Follow the disposal guidance supplied with your product and local requirements.</p>" } }
+      },
+      "block_order": ["prepare", "activation", "disposal"]
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -103,6 +155,10 @@
   },
   "order": [
     "main",
+    "ashme_benefits",
+    "ashme_how",
+    "ashme_product_details",
+    "ashme_faq",
     "related-products"
   ]
 }

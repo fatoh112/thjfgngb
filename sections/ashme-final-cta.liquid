@@ -1,0 +1,28 @@
+<section class="ashme-final-cta" aria-labelledby="AshmeFinalCta-{{ section.id }}">
+  <div class="ashme-shell ashme-final-cta__layout">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AshmeFinalCta-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.body != blank -%}<div class="ashme-final-cta__body rte">{{ section.settings.body }}</div>{%- endif -%}
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <a class="ashme-button ashme-button--primary" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">
+        {{ section.settings.button_label | escape }} <span aria-hidden="true">&rarr;</span>
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AshMe closing invitation",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Make room for a better routine" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A better place for ash starts here." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>Discover AshMe and find the product details that fit your needs.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore AshMe" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "AshMe closing invitation" }]
+}
+{% endschema %}

@@ -36,8 +36,15 @@
   }
 {%- endstyle -%}
 
-<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
-  {%- paginate collection.products by section.settings.products_per_page -%}
+<div class="ashme-collection section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+{%- paginate collection.products by section.settings.products_per_page -%}
+    {%- assign ashme_visible_page_count = 0 -%}
+    {%- for product in collection.products -%}
+      {%- assign ashme_sample_handle = product.handle | downcase -%}
+      {%- unless ashme_sample_handle contains 'other-example-product-' or product.tags contains 'Sample Product' -%}
+        {%- assign ashme_visible_page_count = ashme_visible_page_count | plus: 1 -%}
+      {%- endunless -%}
+    {%- endfor -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
@@ -86,7 +93,7 @@
                 {%- else -%}
                   {{
                     'products.facets.product_count'
-                    | t: product_count: collection.products_count, count: collection.all_products_count
+            | t: product_count: ashme_visible_page_count, count: collection.all_products_count
                   }}
                 {%- endif -%}
               </span>
@@ -112,7 +119,8 @@
             enable_filtering: section.settings.enable_filtering,
             enable_sorting: section.settings.enable_sorting,
             filter_type: section.settings.filter_type,
-            paginate: paginate
+            paginate: paginate,
+            visible_product_count: ashme_visible_page_count
           %}
         </aside>
       {%- endif -%}
@@ -154,6 +162,12 @@
             >
               {% assign skip_card_product_styles = false %}
               {%- for product in collection.products -%}
+                {%- assign ashme_sample_handle = product.handle | downcase -%}
+                {%- if ashme_sample_handle contains 'other-example-product-' or product.tags contains 'Sample Product' -%}
+                  {%- continue -%}
+                {%- endif -%}
+                {%- capture sample_product -%}{%- render 'ashme-sample-product', product: product -%}{%- endcapture -%}
+                {%- unless sample_product == 'true' -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
@@ -179,6 +193,7 @@
                   %}
                 </li>
                 {%- assign skip_card_product_styles = true -%}
+                {%- endunless -%}
               {%- endfor -%}
             </ul>
 

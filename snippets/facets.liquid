@@ -420,7 +420,9 @@
           <div class="product-count light" role="status">
             <h2 class="product-count__text text-body">
               <span id="ProductCountDesktop">
-                {%- if results.results_count -%}
+                {%- if visible_product_count != nil -%}
+                  {{ visible_product_count }} products shown
+                {%- elsif results.results_count -%}
                   {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
                 {%- elsif results.products_count == results.all_products_count -%}
                   {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
@@ -490,7 +492,9 @@
                   {%- endif -%}
                 </h2>
                 <p class="mobile-facets__count">
-                  {%- if results.results_count -%}
+                  {%- if visible_product_count != nil -%}
+                    {{ visible_product_count }} products shown
+                  {%- elsif results.results_count -%}
                     {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
                   {%- elsif results.products_count == results.all_products_count -%}
                     {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
@@ -874,7 +878,9 @@
   >
     <h2 class="product-count__text text-body">
       <span id="ProductCount">
-        {%- if results.results_count -%}
+        {%- if visible_product_count != nil -%}
+          {{ visible_product_count }} products shown
+        {%- elsif results.results_count -%}
           {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
         {%- elsif results.products_count == results.all_products_count -%}
           {{ 'products.facets.product_count_simple' | t: count: results.products_count }}

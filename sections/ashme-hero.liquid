@@ -1,0 +1,76 @@
+{%- assign featured_product = section.settings.product -%}
+{%- if featured_product == blank -%}
+  {%- assign featured_product = all_products['ashme-water-activated-ashtray-disposable-gel-ashtray'] -%}
+{%- endif -%}
+{%- assign hero_image = section.settings.image | default: featured_product.featured_image -%}
+{%- if featured_product != blank -%}
+  {%- capture hero_is_sample -%}{%- render 'ashme-sample-product', product: featured_product -%}{%- endcapture -%}
+  {%- if hero_is_sample == 'true' -%}{%- assign featured_product = nil -%}{%- assign hero_image = section.settings.image -%}{%- endif -%}
+{%- endif -%}
+
+<section class="ashme-hero" aria-labelledby="AshmeHero-{{ section.id }}">
+  <div class="ashme-shell ashme-hero__layout">
+    <div class="ashme-hero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 id="AshmeHero-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.body != blank -%}
+        <div class="ashme-hero__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+      <div class="ashme-actions">
+        {%- if section.settings.primary_label != blank -%}
+          <a class="ashme-button ashme-button--primary" href="{{ featured_product.url | default: section.settings.primary_link | default: routes.all_products_collection_url }}">
+            {{ section.settings.primary_label | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_label != blank and section.settings.secondary_link != blank -%}
+          <a class="ashme-button ashme-button--text" href="{{ section.settings.secondary_link }}">
+            {{ section.settings.secondary_label | escape }}
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.supporting_text != blank -%}
+        <p class="ashme-hero__supporting">{{ section.settings.supporting_text | escape }}</p>
+      {%- endif -%}
+    </div>
+    <div class="ashme-hero__visual">
+      {%- if hero_image != blank -%}
+        {{ hero_image | image_url: width: 1600 | image_tag: class: 'ashme-hero__image', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', loading: 'eager', fetchpriority: 'high' }}
+      {%- else -%}
+        <div class="ashme-hero__wordmark" aria-label="AshMe">
+          <span class="ashme-hero__wordmark-name">AshMe</span>
+          <span class="ashme-hero__wordmark-caption">A WATER-ACTIVATED<br>DISPOSABLE ASHTRAY</span>
+        </div>
+      {%- endif -%}
+      {%- if featured_product != blank -%}
+        <a class="ashme-hero__product-note" href="{{ featured_product.url }}">
+          <span>{{ featured_product.title | escape }}</span>
+          <span>{{ featured_product.price | money }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AshMe hero",
+  "tag": "section",
+  "class": "section-ashme-hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A considered everyday essential" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ash, handled with more care." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>Meet AshMe: the water-activated disposable ashtray designed for simple, everyday use.</p>" },
+    { "type": "product", "id": "product", "label": "Featured AshMe product" },
+    { "type": "image_picker", "id": "image", "label": "Hero image", "info": "Uses the selected product image when left blank." },
+    { "type": "text", "id": "primary_label", "label": "Primary button", "default": "Meet AshMe" },
+    { "type": "url", "id": "primary_link", "label": "Fallback button link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button", "default": "See how it works" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary button link" },
+    { "type": "text", "id": "supporting_text", "label": "Small supporting line", "default": "Thoughtfully simple. Ready when you are." }
+  ],
+  "presets": [{ "name": "AshMe hero" }]
+}
+{% endschema %}

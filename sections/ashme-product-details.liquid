@@ -1,0 +1,49 @@
+<section class="ashme-section ashme-product-details" aria-labelledby="AshmeDetails-{{ section.id }}">
+  <div class="ashme-shell">
+    <div class="ashme-section__intro ashme-section__intro--row">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="AshmeDetails-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      </div>
+      {%- if section.settings.body != blank -%}<div class="ashme-section__body rte">{{ section.settings.body }}</div>{%- endif -%}
+    </div>
+    <div class="ashme-product-details__grid">
+      {%- for block in section.blocks -%}
+        <article class="ashme-product-detail" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'ashme-product-detail__image', widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy' }}
+          {%- endif -%}
+          <div class="ashme-product-detail__copy">
+            {%- if block.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ block.settings.eyebrow | escape }}</p>{%- endif -%}
+            <h3>{{ block.settings.heading | escape }}</h3>
+            {%- if block.settings.body != blank -%}<div class="rte">{{ block.settings.body }}</div>{%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AshMe product details",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A closer look" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made to fit into the everyday." },
+    { "type": "richtext", "id": "body", "label": "Supporting text", "default": "<p>See the product format and preparation details in closer view.</p>" }
+  ],
+  "blocks": [
+    { "type": "detail", "name": "Product detail", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Product image" },
+      { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Water activation" },
+      { "type": "text", "id": "heading", "label": "Heading", "default": "A simple preparation step." },
+      { "type": "richtext", "id": "body", "label": "Description", "default": "<p>Add water to the marked level and follow the instructions supplied with the product.</p>" }
+    ] }
+  ],
+  "max_blocks": 3,
+  "presets": [{ "name": "AshMe product details", "blocks": [
+    { "type": "detail", "settings": { "eyebrow": "Water activation", "heading": "A simple preparation step.", "body": "<p>Add water to the marked level and follow the instructions supplied with the product.</p>" } },
+    { "type": "detail", "settings": { "eyebrow": "Everyday format", "heading": "A dedicated place for ash.", "body": "<p>Use AshMe as described in the product instructions and follow its disposal guidance.</p>" } }
+  ] }]
+}
+{% endschema %}

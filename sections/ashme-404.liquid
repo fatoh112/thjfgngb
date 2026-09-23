@@ -1,0 +1,23 @@
+<section class="template-404 page-width page-margin center" aria-labelledby="Ashme404-{{ section.id }}">
+  {%- if section.settings.eyebrow != blank -%}<p class="ashme-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+  <h1 id="Ashme404-{{ section.id }}" class="title">{{ section.settings.heading | escape }}</h1>
+  {%- if section.settings.body != blank -%}<p class="ashme-404__body">{{ section.settings.body | escape }}</p>{%- endif -%}
+  <div class="ashme-404__actions">
+    <a href="{{ routes.all_products_collection_url }}" class="button button--primary">{{ section.settings.shop_label | escape }}</a>
+    <a href="{{ routes.root_url }}" class="button button--secondary">{{ section.settings.home_label | escape }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AshMe page not found",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "404 · Page not found" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "This page has gone missing." },
+    { "type": "text", "id": "body", "label": "Supporting text", "default": "The link may be out of date, or the page may have moved." },
+    { "type": "text", "id": "shop_label", "label": "Shop button", "default": "Explore products" },
+    { "type": "text", "id": "home_label", "label": "Home button", "default": "Back to AshMe" }
+  ],
+  "presets": [{ "name": "AshMe page not found" }]
+}
+{% endschema %}

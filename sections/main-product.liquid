@@ -1,3 +1,13 @@
+{%- capture ashme_current_product_is_sample -%}{%- render 'ashme-sample-product', product: product -%}{%- endcapture -%}
+{%- if ashme_current_product_is_sample == 'true' -%}
+  <section class="ashme-section ashme-spotlight" aria-labelledby="AshmeUnavailableProduct-{{ section.id }}">
+    <div class="page-width ashme-spotlight__configuration">
+      <h1 id="AshmeUnavailableProduct-{{ section.id }}">This product is unavailable.</h1>
+      <p>Browse the AshMe products currently available.</p>
+      <a class="button button--primary" href="{{ routes.all_products_collection_url }}">Shop AshMe</a>
+    </div>
+  </section>
+{%- else -%}
 <product-info
   id="MainProduct-{{ section.id }}"
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
@@ -41,6 +51,7 @@
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'ashme-product-sticky.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
     <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
@@ -722,7 +733,22 @@
       {{ product | structured_data }}
     </script>
   </div>
+  <ashme-sticky-buy class="ashme-mobile-buy" data-section-id="{{ section.id }}">
+    <div class="ashme-mobile-buy__price" data-ashme-sticky-price aria-live="polite">
+      {% render 'price', product: product, use_variant: true %}
+    </div>
+    <button class="button button--primary ashme-mobile-buy__button" type="submit" name="add" form="{{ product_form_id }}" data-ashme-sticky-button>
+      <span data-ashme-sticky-label>
+        {%- if product.selected_or_first_available_variant.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </span>
+    </button>
+  </ashme-sticky-buy>
 </product-info>
+{%- endif -%}
 
 {% schema %}
 {

@@ -39,11 +39,21 @@
 {%- endstyle -%}
 
 {%- liquid
-  assign products_to_display = section.settings.collection.all_products_count
-
-  if section.settings.collection.all_products_count > section.settings.products_to_show
+  assign products_to_display = 0
+  for featured_product in section.settings.collection.products limit: 50
+    capture featured_product_is_sample
+      render 'ashme-sample-product', product: featured_product
+    endcapture
+    unless featured_product_is_sample == 'true'
+      assign products_to_display = products_to_display | plus: 1
+    endunless
+    if products_to_display > section.settings.products_to_show
+      assign more_in_collection = true
+      break
+    endif
+  endfor
+  if products_to_display > section.settings.products_to_show
     assign products_to_display = section.settings.products_to_show
-    assign more_in_collection = true
   endif
 
   assign columns_mobile_int = section.settings.columns_mobile | plus: 0
@@ -95,9 +105,17 @@
         aria-label="{{ 'general.slider.name' | t }}"
       >
         {% assign skip_card_product_styles = false %}
-        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+        {%- assign ashme_displayed_count = 0 -%}
+        {%- for product in section.settings.collection.products limit: 50 -%}
+          {%- assign ashme_sample_handle = product.handle | downcase -%}
+          {%- if ashme_sample_handle contains 'other-example-product-' or product.tags contains 'Sample Product' -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- capture sample_product -%}{%- render 'ashme-sample-product', product: product -%}{%- endcapture -%}
+          {%- if sample_product != 'true' and ashme_displayed_count < section.settings.products_to_show -%}
+          {%- assign ashme_displayed_count = ashme_displayed_count | plus: 1 -%}
           <li
-            id="Slide-{{ section.id }}-{{ forloop.index }}"
+            id="Slide-{{ section.id }}-{{ ashme_displayed_count }}"
             class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {% if settings.animations_reveal_on_scroll %}
               data-cascade
@@ -117,34 +135,14 @@
             %}
           </li>
           {%- assign skip_card_product_styles = true -%}
-        {%- else -%}
-          {%- for i in (1..section.settings.columns_desktop) -%}
-            <li
-              class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-              {% if settings.animations_reveal_on_scroll %}
-                data-cascade
-                style="--animation-order: {{ forloop.index }};"
-              {% endif %}
-            >
-              {% liquid
-                assign ridx = forloop.rindex
-                case ridx
-                  when 5
-                    assign ridx = 1
-                  when 6
-                    assign ridx = 2
-                endcase
-              %}
-              {%- assign placeholder_image = 'product-apparel-' | append: ridx -%}
-              {% render 'card-product',
-                show_vendor: section.settings.show_vendor,
-                media_aspect_ratio: section.settings.image_ratio,
-                image_shape: section.settings.image_shape,
-                placeholder_image: placeholder_image
-              %}
-            </li>
-          {%- endfor -%}
+          {%- endif -%}
+          {%- if ashme_displayed_count >= section.settings.products_to_show -%}{%- break -%}{%- endif -%}
         {%- endfor -%}
+        {%- if ashme_displayed_count == 0 and request.design_mode -%}
+          <li class="grid__item ashme-collection-configuration">
+            <p>Select a collection containing AshMe products. Demo items are intentionally excluded.</p>
+          </li>
+        {%- endif -%}
       </ul>
       {%- if show_mobile_slider or show_desktop_slider -%}
         <div class="slider-buttons">
