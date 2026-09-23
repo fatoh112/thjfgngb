@@ -3,6 +3,10 @@
   {%- assign featured_product = all_products['ashme-water-activated-ashtray-disposable-gel-ashtray'] -%}
 {%- endif -%}
 {%- assign hero_image = section.settings.image | default: featured_product.featured_image -%}
+{%- assign hero_video = blank -%}
+{%- if section.settings.image == blank and featured_product != blank -%}
+  {%- assign hero_video = featured_product.media | where: 'media_type', 'video' | first -%}
+{%- endif -%}
 {%- if featured_product != blank -%}
   {%- capture hero_is_sample -%}{%- render 'ashme-sample-product', product: featured_product -%}{%- endcapture -%}
   {%- if hero_is_sample == 'true' -%}{%- assign featured_product = nil -%}{%- assign hero_image = section.settings.image -%}{%- endif -%}
@@ -39,15 +43,22 @@
       <div class="ashme-hero__light" aria-hidden="true"></div>
       <div class="ashme-hero__orbit ashme-hero__orbit--outer" aria-hidden="true"></div>
       <div class="ashme-hero__orbit ashme-hero__orbit--inner" aria-hidden="true"></div>
-      <div class="ashme-hero__stage" data-ashme-tilt-layer>
-        {%- if hero_image != blank -%}
-          {{ hero_image | image_url: width: 1600 | image_tag: class: 'ashme-hero__image', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', loading: 'eager', fetchpriority: 'high' }}
-        {%- else -%}
-          <div class="ashme-hero__wordmark" aria-label="AshMe">
-            <span class="ashme-hero__wordmark-name">AshMe</span>
-            <span class="ashme-hero__wordmark-caption">WATER-ACTIVATED<br>DISPOSABLE ASHTRAY</span>
+      <div class="ashme-hero__particle-field" aria-hidden="true"></div>
+      <div class="ashme-hero__stage" data-ashme-scroll-stage>
+        <div class="ashme-hero__stage-tilt" data-ashme-tilt-layer aria-hidden="true">
+          <div class="ashme-hero__stage-float" data-ashme-float>
+            {%- if hero_video != blank -%}
+              {{ hero_video | video_tag: class: 'ashme-hero__video', muted: true, controls: false, playsinline: true, preload: 'none' }}
+            {%- elsif hero_image != blank -%}
+              {{ hero_image | image_url: width: 1600 | image_tag: class: 'ashme-hero__image', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', loading: 'eager', fetchpriority: 'high' }}
+            {%- else -%}
+              <div class="ashme-hero__wordmark" aria-label="AshMe">
+                <span class="ashme-hero__wordmark-name">AshMe</span>
+                <span class="ashme-hero__wordmark-caption">WATER-ACTIVATED<br>DISPOSABLE ASHTRAY</span>
+              </div>
+            {%- endif -%}
           </div>
-        {%- endif -%}
+        </div>
       </div>
       {%- if featured_product != blank -%}
         <a class="ashme-hero__product-note" href="{{ featured_product.url }}">

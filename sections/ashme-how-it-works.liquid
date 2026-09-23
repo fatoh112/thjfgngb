@@ -32,6 +32,7 @@
             </button>
           {%- endfor -%}
         </div>
+        <div class="ashme-process__progress" role="progressbar" aria-label="Story progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-ashme-progress-fill></span></div>
         {%- assign first_step = section.blocks.first -%}
         <div class="ashme-process__panel" id="AshmeStepPanel-{{ section.id }}" role="tabpanel" aria-labelledby="AshmeStepTab-{{ section.id }}-1" aria-live="polite" tabindex="0">
           <span class="ashme-process__panel-number" data-ashme-panel-number>01 / {{ section.blocks.size | prepend: '0' }}</span>
