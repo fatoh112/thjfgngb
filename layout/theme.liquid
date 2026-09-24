@@ -7,6 +7,28 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
+    {% if request.page_type == 'index' %}
+      <script>
+        (() => {
+          const query = new URLSearchParams(location.search);
+          let seen = false;
+          try { seen = sessionStorage.getItem('ashme-cinematic-intro-seen') === '1'; } catch {}
+          const forced = query.get('ashme_intro') === '1';
+          const editor = query.has('shopify_design_mode') || window.Shopify?.designMode;
+          const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (location.pathname === '/' && !editor && !reduced && (forced || !seen)) {
+            document.documentElement.classList.add('ashme-cinematic-pending');
+            window.__ashmeRevealFailsafe = setTimeout(() => {
+              document.documentElement.classList.remove('ashme-cinematic-pending', 'ashme-cinematic-active', 'ashme-website-reveal');
+              document.documentElement.style.overflow = '';
+              document.body.style.overflow = '';
+            }, 11500);
+          }
+        })();
+      </script>
+      {{ 'ashme-cinematic-intro.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}

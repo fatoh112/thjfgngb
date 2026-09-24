@@ -1,17 +1,27 @@
-<link rel="stylesheet" href="{{ 'ashme-cinematic-intro.css' | asset_url }}">
-<section class="ashme-cinematic" data-ashme-cinematic data-cigarette-url="{{ 'ashme-cigarette.glb' | asset_url }}" data-tray-url="{{ 'ashme-tray.glb' | asset_url }}" aria-label="{{ section.settings.eyebrow | escape }}" hidden>
+<section class="ashme-cinematic" data-ashme-cinematic data-cigarette-url="{{ 'ashme-cigarette.glb' | asset_url }}" data-tray-url="{{ 'ashme-tray.glb' | asset_url }}" data-product-eyebrow="THE ASHME ESSENTIAL" data-product-line="A better place for ash." aria-label="{{ section.settings.eyebrow | escape }}">
   <canvas class="ashme-cinematic__canvas" data-ashme-canvas aria-hidden="true"></canvas>
   <div class="ashme-cinematic__shade" aria-hidden="true"></div>
   <div class="ashme-cinematic__copy" data-ashme-copy>
-    <span class="ashme-cinematic__eyebrow">{{ section.settings.eyebrow | escape }}</span>
-    <p class="ashme-cinematic__line">{{ section.settings.supporting_text | escape }}</p>
+    <span class="ashme-cinematic__eyebrow" data-ashme-eyebrow>{{ section.settings.eyebrow | escape }}</span>
+    <p class="ashme-cinematic__line" data-ashme-line>{{ section.settings.supporting_text | escape }}</p>
   </div>
   <button class="ashme-cinematic__skip" type="button" data-ashme-skip aria-keyshortcuts="Escape">
     {{ section.settings.skip_label | escape }}
     <span aria-hidden="true">↗</span>
   </button>
+  <span class="ashme-cinematic__loading" data-ashme-loading role="status">Preparing the scene</span>
   <span class="ashme-cinematic__progress" data-ashme-progress aria-hidden="true"></span>
 </section>
+{% capture ashme_scene_asset %}{{ 'ashme-intro-scene.js' | asset_url }}{% endcapture %}
+{% capture ashme_materials_asset %}{{ 'ashme-intro-materials.js' | asset_url }}{% endcapture %}
+{% assign ashme_scene_path = ashme_scene_asset | split: '?' | first %}
+{% assign ashme_materials_path = ashme_materials_asset | split: '?' | first %}
+<script type="importmap">
+  { "imports": {
+    "{{ ashme_scene_path }}": "{{ ashme_scene_asset }}",
+    "{{ ashme_materials_path }}": "{{ ashme_materials_asset }}"
+  } }
+</script>
 <script type="module" src="{{ 'ashme-cinematic-intro.js' | asset_url }}"></script>
 
 {% schema %}
