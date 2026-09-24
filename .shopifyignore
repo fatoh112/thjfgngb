@@ -1,0 +1,8 @@
+.git/
+.gitignore
+.ashme-motion-tmp/**
+node_modules/**
+tools/**
+artifacts/**
+package.json
+package-lock.json

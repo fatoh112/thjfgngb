@@ -21,11 +21,16 @@
             window.__ashmeRevealFailsafe = setTimeout(() => {
               document.documentElement.classList.remove('ashme-cinematic-pending', 'ashme-cinematic-active', 'ashme-website-reveal');
               document.documentElement.style.overflow = '';
-              document.body.style.overflow = '';
+              if (document.body) document.body.style.overflow = '';
             }, 11500);
           }
         })();
       </script>
+      <style>
+        html.ashme-cinematic-pending #MainContent > .shopify-section:not(.section-ashme-cinematic-intro),
+        html.ashme-cinematic-pending .shopify-section-group-header-group,
+        html.ashme-cinematic-pending .shopify-section-group-footer-group { visibility: hidden; }
+      </style>
       {{ 'ashme-cinematic-intro.css' | asset_url | stylesheet_tag }}
     {% endif %}
 

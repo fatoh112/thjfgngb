@@ -1,0 +1,10 @@
+{
+  "name": "ashme-storefront-v3-build",
+  "private": true,
+  "scripts": {
+    "build:intro": "esbuild assets/ashme-intro-v3.entry.js --bundle --minify --format=iife --target=es2020 --outfile=assets/ashme-intro-v3.bundle.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

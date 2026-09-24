@@ -1,4 +1,12 @@
-<section class="ashme-cinematic" data-ashme-cinematic data-cigarette-url="{{ 'ashme-cigarette.glb' | asset_url }}" data-tray-url="{{ 'ashme-tray.glb' | asset_url }}" data-product-eyebrow="THE ASHME ESSENTIAL" data-product-line="A better place for ash." aria-label="{{ section.settings.eyebrow | escape }}">
+<section
+  class="ashme-cinematic"
+  data-ashme-cinematic
+  data-cigarette-url="{{ 'ashme-intro-v3.glb' | asset_url }}"
+  data-tray-url="{{ 'ashme-tray-v3.glb' | asset_url }}"
+  data-product-eyebrow="THE ASHME ESSENTIAL"
+  data-product-line="A better place for ash."
+  aria-label="{{ section.settings.eyebrow | escape }}"
+>
   <canvas class="ashme-cinematic__canvas" data-ashme-canvas aria-hidden="true"></canvas>
   <div class="ashme-cinematic__shade" aria-hidden="true"></div>
   <div class="ashme-cinematic__copy" data-ashme-copy>
@@ -9,20 +17,14 @@
     {{ section.settings.skip_label | escape }}
     <span aria-hidden="true">↗</span>
   </button>
-  <span class="ashme-cinematic__loading" data-ashme-loading role="status">Preparing the scene</span>
+  <button class="ashme-cinematic__record" type="button" data-ashme-record hidden>Start screen recording</button>
+  <div class="ashme-cinematic__loading" data-ashme-loading role="progressbar" aria-label="Loading the AshMe intro" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <span class="ashme-cinematic__loading-brand">ASHME</span>
+    <span class="ashme-cinematic__loading-track" aria-hidden="true"><i data-ashme-load-fill></i></span>
+  </div>
   <span class="ashme-cinematic__progress" data-ashme-progress aria-hidden="true"></span>
 </section>
-{% capture ashme_scene_asset %}{{ 'ashme-intro-scene.js' | asset_url }}{% endcapture %}
-{% capture ashme_materials_asset %}{{ 'ashme-intro-materials.js' | asset_url }}{% endcapture %}
-{% assign ashme_scene_path = ashme_scene_asset | split: '?' | first %}
-{% assign ashme_materials_path = ashme_materials_asset | split: '?' | first %}
-<script type="importmap">
-  { "imports": {
-    "{{ ashme_scene_path }}": "{{ ashme_scene_asset }}",
-    "{{ ashme_materials_path }}": "{{ ashme_materials_asset }}"
-  } }
-</script>
-<script type="module" src="{{ 'ashme-cinematic-intro.js' | asset_url }}"></script>
+<script src="{{ 'ashme-intro-v3.bundle.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
@@ -34,8 +36,6 @@
     { "type": "text", "id": "supporting_text", "label": "Supporting text", "default": "A small moment. A better way to handle ash." },
     { "type": "text", "id": "skip_label", "label": "Skip button", "default": "Skip intro" }
   ],
-  "presets": [
-    { "name": "AshMe cinematic intro" }
-  ]
+  "presets": [{ "name": "AshMe cinematic intro" }]
 }
 {% endschema %}

@@ -1,0 +1,5 @@
+node_modules/
+artifacts/
+.ashme-motion-tmp/
+__pycache__/
+*.py[cod]
