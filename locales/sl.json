@@ -232,6 +232,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Strani ni mogoče najti",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Za »{{ terms }}« ni bil najden noben rezultat. Preverite črkovanje ali uporabite drugo besedo ali frazo.",
       "page": "Stran",
@@ -285,10 +289,6 @@
         "error_heading": "Prilagodite naslednje:",
         "title": "Obrazec za stik"
       }
-    },
-    "404": {
-      "title": "Strani ni mogoče najti",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -404,6 +404,12 @@
       "min_error": "Ta artikel ima najmanj {{ min }}",
       "max_error": "Ta artikel ima največ {{ max }}",
       "step_error": "Ta artikel lahko dodate samo v korakih po {{ step }}."
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "Vstopi z zvokom",
+      "skip_intro": "Preskoči uvod",
+      "loading": "Pripravljamo predstavitev AshMe",
+      "playback_error": "Zvoka ni bilo mogoče zagnati. Poskusite znova ali preskočite uvod."
     }
   },
   "localization": {

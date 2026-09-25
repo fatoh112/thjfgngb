@@ -228,6 +228,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Pagina nu a fost găsită",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Nu s-au găsit rezultate pentru „{{ terms }}”. Verificați ortografia sau utilizați alt cuvânt sau altă expresie.",
       "title": "Rezultatele căutării",
@@ -276,10 +280,6 @@
         "error_heading": "Vă rugăm să ajustați următoarele:",
         "title": "Formular de contact"
       }
-    },
-    "404": {
-      "title": "Pagina nu a fost găsită",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -392,6 +392,12 @@
       "min_error": "Pentru acest articol, valoarea minimă este de {{ min }}",
       "max_error": "Pentru acest articol, valoarea maximă este de {{ max }}",
       "step_error": "Poți introduce acest articol numai în incrementuri de {{ step }}"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "Intră cu sunet",
+      "skip_intro": "Omite introducerea",
+      "loading": "Se pregătește prezentarea AshMe",
+      "playback_error": "Sunetul nu a putut porni. Încearcă din nou sau omite introducerea."
     }
   },
   "localization": {

@@ -1,0 +1,64 @@
+<section
+  class="ashme-video-intro"
+  data-ashme-video-intro
+  data-state="loading"
+  data-error-text="{{ 'sections.ashme_video_intro.playback_error' | t | escape }}"
+  aria-labelledby="ashme-video-intro-title"
+  aria-describedby="ashme-video-intro-status"
+  role="dialog"
+  aria-modal="true"
+  >
+  <video
+    class="ashme-video-intro__video"
+    data-ashme-video
+    data-video-src="{{ 'ashme-video-intro.mp4' | asset_url | escape }}"
+    data-poster-src="{{ 'ashme-video-intro-poster.jpg' | asset_url | escape }}"
+    preload="none"
+    playsinline
+    webkit-playsinline
+    aria-hidden="true"
+    tabindex="-1"
+  ></video>
+  <div class="ashme-video-intro__shade" aria-hidden="true"></div>
+  <div class="ashme-video-intro__brand">
+    <h1 class="ashme-video-intro__wordmark" id="ashme-video-intro-title">ASHME</h1>
+  </div>
+  <div class="ashme-video-intro__gate">
+    <button
+      class="ashme-video-intro__enter"
+      data-ashme-enter
+      type="button"
+      aria-label="{{ 'sections.ashme_video_intro.enter_with_sound' | t | escape }}"
+      disabled
+      hidden
+    >
+      <span>{{ 'sections.ashme_video_intro.enter_with_sound' | t | escape }}</span>
+      <span class="ashme-video-intro__arrow" aria-hidden="true">↗</span>
+    </button>
+    <p class="ashme-video-intro__status" data-ashme-status id="ashme-video-intro-status" role="status" aria-live="polite">
+      <span class="ashme-video-intro__spinner" aria-hidden="true"></span>
+      <span data-ashme-status-text>{{ 'sections.ashme_video_intro.loading' | t | escape }}</span>
+    </p>
+  </div>
+  <button
+    class="ashme-video-intro__skip"
+    data-ashme-skip
+    type="button"
+    aria-label="{{ 'sections.ashme_video_intro.skip_intro' | t | escape }}"
+    aria-keyshortcuts="Escape"
+  >
+    <span>{{ 'sections.ashme_video_intro.skip_intro' | t | escape }}</span>
+    <span aria-hidden="true">↗</span>
+  </button>
+</section>
+<script src="{{ 'ashme-video-intro.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "AshMe video intro",
+  "tag": "section",
+  "class": "section-ashme-video-intro",
+  "settings": [],
+  "presets": [{ "name": "AshMe video intro" }]
+}
+{% endschema %}

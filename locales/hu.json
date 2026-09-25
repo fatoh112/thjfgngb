@@ -224,6 +224,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Nem találjuk az oldalt",
+      "subtext": "404-es hiba történt."
+    },
     "search": {
       "no_results": "Nincs találat erre: {{ terms }}. Ellenőrizd a helyesírást, vagy írj be egy másik szót vagy kifejezést.",
       "results_with_count": {
@@ -267,10 +271,6 @@
         "error_heading": "Kérjük, helyesbítsd a következőket:",
         "title": "Kapcsolattartói űrlap"
       }
-    },
-    "404": {
-      "title": "Nem találjuk az oldalt",
-      "subtext": "404-es hiba történt."
     }
   },
   "sections": {
@@ -380,6 +380,12 @@
       "min_error": "A termék minimális mennyisége {{ min }}",
       "max_error": "A termék maximális mennyisége {{ max }}",
       "step_error": "A termék mennyisége csak {{ step }} darabos lépésekben növelhető"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "Belépés hanggal",
+      "skip_intro": "Bevezető kihagyása",
+      "loading": "Az AshMe-bemutató előkészítése",
+      "playback_error": "A hang nem indult el. Próbáld újra, vagy hagyd ki a bevezetőt."
     }
   },
   "localization": {

@@ -8,30 +8,53 @@
     <link rel="canonical" href="{{ canonical_url }}">
 
     {% if request.page_type == 'index' %}
-      <script>
-        (() => {
-          const query = new URLSearchParams(location.search);
-          let seen = false;
-          try { seen = sessionStorage.getItem('ashme-cinematic-intro-seen') === '1'; } catch {}
-          const forced = query.get('ashme_intro') === '1';
-          const editor = query.has('shopify_design_mode') || window.Shopify?.designMode;
-          const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (location.pathname === '/' && !editor && !reduced && (forced || !seen)) {
-            document.documentElement.classList.add('ashme-cinematic-pending');
-            window.__ashmeRevealFailsafe = setTimeout(() => {
-              document.documentElement.classList.remove('ashme-cinematic-pending', 'ashme-cinematic-active', 'ashme-website-reveal');
-              document.documentElement.style.overflow = '';
-              if (document.body) document.body.style.overflow = '';
-            }, 11500);
-          }
-        })();
-      </script>
+      {% unless request.design_mode %}
+        <script>
+          (() => {
+            const query = new URLSearchParams(location.search);
+            const root = document.documentElement;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let seen = false;
+
+            try {
+              seen = sessionStorage.getItem('ashmeVideoIntroSeen') === '1';
+            } catch {}
+
+            if (query.get('intro') === '0' || reducedMotion || (seen && query.get('intro') !== '1' && query.get('ashme_intro') !== '1')) return;
+
+            root.classList.add('ashme-video-intro-pending');
+            window.__ashmeVideoIntroFailsafe = window.setTimeout(() => {
+              root.classList.remove('ashme-video-intro-pending', 'ashme-video-intro-active', 'ashme-video-intro-revealing');
+              try { sessionStorage.setItem('ashmeVideoIntroSeen', '1'); } catch {}
+            }, 3500);
+          })();
+        </script>
+      {% endunless %}
       <style>
-        html.ashme-cinematic-pending #MainContent > .shopify-section:not(.section-ashme-cinematic-intro),
-        html.ashme-cinematic-pending .shopify-section-group-header-group,
-        html.ashme-cinematic-pending .shopify-section-group-footer-group { visibility: hidden; }
+        html.ashme-video-intro-pending,
+        html.ashme-video-intro-active { overflow: hidden; }
+        html.ashme-video-intro-pending body,
+        html.ashme-video-intro-active body { overflow: hidden; }
+        html.ashme-video-intro-pending #MainContent > .shopify-section:not(.section-ashme-video-intro),
+        html.ashme-video-intro-pending .shopify-section-group-header-group,
+        html.ashme-video-intro-pending .shopify-section-group-footer-group,
+        html.ashme-video-intro-active #MainContent > .shopify-section:not(.section-ashme-video-intro),
+        html.ashme-video-intro-active .shopify-section-group-header-group,
+        html.ashme-video-intro-active .shopify-section-group-footer-group { visibility: hidden; }
+        html.ashme-video-intro-revealing #MainContent > .shopify-section:not(.section-ashme-video-intro),
+        html.ashme-video-intro-revealing .shopify-section-group-header-group,
+        html.ashme-video-intro-revealing .shopify-section-group-footer-group {
+          opacity: 0;
+          transform: translateY(0.8rem);
+          transition: opacity 700ms ease, transform 700ms ease;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          html.ashme-video-intro-revealing #MainContent > .shopify-section:not(.section-ashme-video-intro),
+          html.ashme-video-intro-revealing .shopify-section-group-header-group,
+          html.ashme-video-intro-revealing .shopify-section-group-footer-group { transition-duration: 1ms; }
+        }
       </style>
-      {{ 'ashme-cinematic-intro.css' | asset_url | stylesheet_tag }}
+      {{ 'ashme-video-intro.css' | asset_url | stylesheet_tag }}
     {% endif %}
 
     {%- if settings.favicon != blank -%}

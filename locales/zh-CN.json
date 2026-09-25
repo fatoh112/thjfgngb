@@ -224,6 +224,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "找不到页面",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "未找到“{{ terms }}”的结果。请检查拼写或使用其他词或短语。",
       "results_with_count": {
@@ -267,10 +271,6 @@
         "error_heading": "请调整以下内容：",
         "title": "联系表"
       }
-    },
-    "404": {
-      "title": "找不到页面",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -380,6 +380,12 @@
       "min_error": "此商品的最小值为 {{ min }}",
       "max_error": "此商品的最大值为 {{ max }}",
       "step_error": "您只能以 {{ step }} 为增量来添加此商品"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "开启声音并进入",
+      "skip_intro": "跳过片头",
+      "loading": "正在准备 AshMe 开场",
+      "playback_error": "无法播放声音。请重试或跳过片头。"
     }
   },
   "localization": {

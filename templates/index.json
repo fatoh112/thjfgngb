@@ -9,13 +9,9 @@
  */
 {
   "sections": {
-    "ashme_cinematic_intro": {
-      "type": "ashme-cinematic-intro",
-      "settings": {
-        "eyebrow": "ASHME — A QUIETER KIND OF EVERYDAY",
-        "supporting_text": "A small moment. A better way to handle ash.",
-        "skip_label": "Skip intro"
-      }
+    "ashme_video_intro": {
+      "type": "ashme-video-intro",
+      "settings": {}
     },
     "ashme_hero": {
       "type": "ashme-hero",
@@ -170,7 +166,7 @@
     }
   },
   "order": [
-    "ashme_cinematic_intro",
+    "ashme_video_intro",
     "ashme_hero",
     "ashme_benefits",
     "ashme_how",

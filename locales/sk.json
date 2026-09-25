@@ -232,6 +232,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Stránka sa nenašla",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Pre výraz „{{ terms }}“ sa nenašli žiadne výsledky. Skontrolujte pravopis alebo použite iné slovo či slovné spojenie.",
       "title": "Výsledky vyhľadávania",
@@ -285,10 +289,6 @@
         "error_heading": "Upravte tieto údaje:",
         "title": "Kontaktný formulár"
       }
-    },
-    "404": {
-      "title": "Stránka sa nenašla",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -404,6 +404,12 @@
       "min_error": "Minimálne množstvo tejto položky je {{ min }}",
       "max_error": "Maximálne množstvo tejto položky je {{ max }}",
       "step_error": "Túto položku môžete pridať iba v prírastkoch po {{ step }}"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "Vstúpiť so zvukom",
+      "skip_intro": "Preskočiť úvod",
+      "loading": "Pripravujeme predstavenie AshMe",
+      "playback_error": "Zvuk sa nepodarilo spustiť. Skúste to znova alebo preskočte úvod."
     }
   },
   "localization": {

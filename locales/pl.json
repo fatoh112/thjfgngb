@@ -232,6 +232,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Nie znaleziono strony",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Nie znaleziono wyników dla “{{ terms }}”. Sprawdź pisownię lub użyj innego słowa lub zwrotu.",
       "page": "Strona",
@@ -285,10 +289,6 @@
         "error_heading": "Dostosuj następujące dane:",
         "title": "Formularz kontaktowy"
       }
-    },
-    "404": {
-      "title": "Nie znaleziono strony",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -404,6 +404,12 @@
       "min_error": "Pozycja ma minimalny limit {{ min }}",
       "max_error": "Pozycja ma maksymalny limit {{ max }}",
       "step_error": "Możesz dodać tę pozycję tylko z przyrostem o {{ step }}"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "Wejdź z dźwiękiem",
+      "skip_intro": "Pomiń intro",
+      "loading": "Przygotowujemy prezentację AshMe",
+      "playback_error": "Nie udało się uruchomić dźwięku. Spróbuj ponownie lub pomiń intro."
     }
   },
   "localization": {

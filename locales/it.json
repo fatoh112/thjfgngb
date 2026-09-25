@@ -228,6 +228,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Pagina non trovata",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Nessun risultato per \"{{ terms }}\". Controlla l'ortografia o usa una parola o una frase diversa.",
       "page": "Pagina",
@@ -276,10 +280,6 @@
         "error_heading": "Correggi gli errori seguenti:",
         "title": "Modulo di contatto"
       }
-    },
-    "404": {
-      "title": "Pagina non trovata",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -392,6 +392,12 @@
       "min_error": "Questo articolo ha un minimo di {{ min }}",
       "max_error": "Questo articolo ha un massimo di {{ max }}",
       "step_error": "Puoi aggiungere questo articolo solo in incrementi di {{ step }}"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "Entra con audio",
+      "skip_intro": "Salta l’introduzione",
+      "loading": "Preparazione della presentazione AshMe",
+      "playback_error": "Non è stato possibile avviare l’audio. Riprova o salta l’introduzione."
     }
   },
   "localization": {

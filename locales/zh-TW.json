@@ -224,6 +224,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "找不到頁面",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "找不到與「{{ terms }}」相符的結果。請檢查拼字或使用其他字詞。",
       "results_with_count": {
@@ -267,10 +271,6 @@
         "error_heading": "請調整以下內容：",
         "title": "聯絡表單"
       }
-    },
-    "404": {
-      "title": "找不到頁面",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -380,6 +380,12 @@
       "min_error": "此品項下限為 {{ min }}",
       "max_error": "此品項上限為 {{ max }}",
       "step_error": "只能以 {{ step }} 為增量新增此品項"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "開啟音效並進入",
+      "skip_intro": "略過片頭",
+      "loading": "正在準備 AshMe 開場",
+      "playback_error": "無法播放音效。請重試或略過片頭。"
     }
   },
   "localization": {

@@ -224,6 +224,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "ページが見つかりません",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "「{{ terms }}」に一致する結果は見つかりませんでした。スペルを確認するか、別の単語やフレーズを使用してください。",
       "results_with_count": {
@@ -267,10 +271,6 @@
         "error_heading": "以下を確認してください。",
         "title": "お問い合わせフォーム"
       }
-    },
-    "404": {
-      "title": "ページが見つかりません",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -380,6 +380,12 @@
       "min_error": "このアイテムの最小値は{{ min }}です",
       "max_error": "このアイテムの最大値は{{ max }}です",
       "step_error": "このアイテムは、{{ step }}の増分でのみ追加できます"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "音声ありで入る",
+      "skip_intro": "イントロをスキップ",
+      "loading": "AshMeの紹介を準備しています",
+      "playback_error": "音声を再生できませんでした。もう一度お試しいただくか、イントロをスキップしてください。"
     }
   },
   "localization": {

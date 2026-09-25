@@ -224,6 +224,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Siden finnes ikke",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Fant ingen resultater for «{{ terms }}». Kontroller stavemåten, eller bruk et annet ord.",
       "page": "Side",
@@ -267,10 +271,6 @@
         "error_heading": "Juster følgende:",
         "title": "Kontaktskjema"
       }
-    },
-    "404": {
-      "title": "Siden finnes ikke",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -380,6 +380,12 @@
       "min_error": "Denne varen har et minimumsantall på {{ min }}",
       "max_error": "Denne varen har et maksimumsantall på {{ max }}",
       "step_error": "Du kan bare legge til denne varen i multipler av {{ step }}"
+    },
+    "ashme_video_intro": {
+      "enter_with_sound": "Gå inn med lyd",
+      "skip_intro": "Hopp over introen",
+      "loading": "Gjør AshMe-introduksjonen klar",
+      "playback_error": "Lyden kunne ikke startes. Prøv igjen, eller hopp over introen."
     }
   },
   "localization": {
